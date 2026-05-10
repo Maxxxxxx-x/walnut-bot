@@ -34,7 +34,7 @@ git clone https://github.com/MaxixSVK/walnut-bot.git
 2. Install dependencies
 ```sh
 cd walnut-bot
-npm install
+bun install
 ```
 3. From .env.example create a .env file and fill in the required information
 
@@ -42,12 +42,12 @@ npm install
 
 **Note:** When running the bot for the first time (or updating slash commands) you need to deploy slash commands to discord servers. You can do this by running the following command:
 ```sh
-node src/deployCommands.js
+bun src/deployCommands.js
 ```
 
 You can start the bot with the following command:
 ```sh
-npm start
+bun start
 ```
 
 ## License
