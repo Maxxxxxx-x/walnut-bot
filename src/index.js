@@ -1,22 +1,21 @@
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
-const fs = require('fs');
-require('dotenv').config()
+const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const fs = require("fs");
 
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessageReactions,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent
-    ]
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 client.commands = new Collection();
 
-require('./db/dbConnect')();
+require("./db/dbConnect")();
 
-fs.readdirSync('./src/handlers').forEach((file) => {
-    require(`./handlers/${file}`)(client);
+fs.readdirSync("./src/handlers").forEach((file) => {
+  require(`./handlers/${file}`)(client);
 });
 
 client.login(process.env.token);
