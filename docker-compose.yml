@@ -1,0 +1,33 @@
+services:
+  walnut-bot:
+    container_name: walnut-bot
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  db:
+    image: mongo:latest
+    container_name: walnut_mongodb
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MongoUsername}
+      - MONGO_INITDB_ROOT_PASSWORD=${MongoPassword}
+    volumes:
+      - walnut-mongo-data:/data/db
+
+volumes:
+  walnut-mongo-data:
